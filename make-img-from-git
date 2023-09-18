@@ -1,0 +1,20 @@
+# acquire params from cmdline
+while getopts f:u: flag
+do
+  case "${flag}" in
+    f) filename=${OPTARG};;
+    u) url=${OPTARG};;
+  esac
+done
+
+# now create file and format it as a floppy
+dd if=/dev/zero of=./$filename.img count=1440 bs=1k
+mkfs.msdos ./$filename.img
+# use wget to get data from our url
+wget -O $filename $url
+# copy this data to the disk image
+mcopy -i ./$filename.img ./$filename ::/
+# delete temp data
+rm -r ./$filename
+# display our disk image data to confirm it worked
+mdir -i ./$filename.img
