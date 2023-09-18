@@ -13,7 +13,7 @@ mkfs.msdos ./$filename.img
 # use wget to get data from our url
 wget -r -nH --cut-dirs=3 --no-parent --reject="00index.txt, index.html*, *.md5, *.meta4, *.metalink, *.mirrorlist, *.sha1, *.sha256" $url -P ./temp
 # copy this data to the disk image
-mcopy -i ./$filename.img ./temp ::/
+mcopy -i ./$filename.img ./temp/* ::/
 # delete temp data
 rm -r ./temp
 # display our disk image data to confirm it worked
