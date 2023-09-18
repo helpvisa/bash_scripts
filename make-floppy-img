@@ -11,7 +11,7 @@ done
 dd if=/dev/zero of=./$filename.img count=1440 bs=1k
 mkfs.msdos ./$filename.img
 # use wget to get data from our url
-wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*, *.md5, *.meta4, *.metalink, *.mirrorlist, *.sha1, *.sha256" $url -P ./temp
+wget -r -nH --cut-dirs=3 --no-parent --reject="00index.txt, index.html*, *.md5, *.meta4, *.metalink, *.mirrorlist, *.sha1, *.sha256" $url -P ./temp
 # copy this data to the disk image
 mcopy -i ./$filename.img ./temp ::/
 # delete temp data
